@@ -29,7 +29,7 @@ req     = requests.post(rpc_url, json=payload)
 result  = req.json().get('result')
 btb     = result.get('blocktemplate_blob')
 diff    = result.get('difficulty')
-height  = result.get('height')
+height  = result.get('height')-1
 max128  = pow(2, 128)-1
 ndiff   = (height / max128) * diff # this is the difficulty we need
 print('~~ Target difficulty: {}'.format(ndiff))
