@@ -42,7 +42,7 @@ payload = {
     'jsonrpc':'2.0',
     'id':'0',
     'method':'get_block_headers_range',
-    'params':{"start_height":height, "end_height":height-ndiff}
+    'params':{"start_height":height-ndiff, "end_height":height}
 }
 req     = requests.post(rpc_url, json=payload)
 result  = req.json().get('result')
