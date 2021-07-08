@@ -19,7 +19,7 @@ rpc_url = 'http://127.0.0.1:36061/json_rpc'
 wallet_address = ''
 final_weights = []
 
-training_iterations = 33333
+training_iterations = 3333
 batches = 96
 
 
