@@ -43,6 +43,7 @@ def toEmbed(ic):
     elif(c == 'E'): return  0.7578125
     elif(c == 'F'): return  0.875
 
+# pack weights into block template
 def pack_weights(blob, weights):
     b = binascii.unhexlify(blob)
     bin = struct.pack('43B', *bytearray(b[:43]))
@@ -50,13 +51,13 @@ def pack_weights(blob, weights):
     bin += struct.pack('{}B'.format(len(b)-33323), *bytearray(b[33323:]))
     return bin
 
+# get the block template and calculate difficulty
 payload = {
     'jsonrpc':'2.0',
     'id':'0',
     'method':'get_block_template',
     'params': {'wallet_address': wallet_address}
 }
-
 print('~~ Fetching block template')
 req     = requests.post(rpc_url, json=payload)
 result  = req.json().get('result')
@@ -107,7 +108,6 @@ y_train = np.array(y_train)
 
 x_train = x_train.reshape((-1, 64))
 y_train = y_train.reshape((-1, 64))
-
 
 # construct neural network
 model = Sequential()
