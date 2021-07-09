@@ -80,11 +80,33 @@ payload = {
 req     = requests.post(rpc_url, json=payload)
 result  = req.json().get('result')
 
-
 # convert result to x and y fit arrays
+xt = []
+yt = []
+headers = result.get('headers');
+for header in headers:
+    xt.append(header.get('prev_hash'))  # input  hash
+    yt.append(header.get('hash'))       # target hash
+
 x_train = []
+for i, a in enumerate(xt):
+    temp = []
+    for i, b in enumerate(a):
+        temp.append(toEmbed(b))
+    x_train.append(temp)
+
 y_train = []
-# TODO: Finish this segement
+for i, a in enumerate(yt):
+    temp = []
+    for i, b in enumerate(a):
+        temp.append(toEmbed(b))
+    y_train.append(temp)
+
+x_train = np.array(x_train)
+y_train = np.array(y_train)
+
+x_train = x_train.reshape((-1, 64))
+y_train = y_train.reshape((-1, 64))
 
 
 # construct neural network
